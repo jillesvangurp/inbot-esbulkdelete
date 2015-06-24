@@ -9,14 +9,16 @@ def bulkdelete(host, query, page_size, index, type)
   scrolltime='10m'
 
   results = client.search search_type: 'scan', scroll: scrolltime, size: page_size, body: query, fields: [], index: index, type: type
-
+  puts "results: #{results.inspect}"
   while results = client.scroll(scroll_id: results['_scroll_id'], scroll: scrolltime) and not results['hits']['hits'].empty? do
     bulk_items=[]
     results['hits']['hits'].each { | hit |
       bulk_items << { delete: { _index: hit['_index'], _type: hit['_type'], _id: hit['_id']  } }
     }
+    puts "bulk deleting #{bulk_items.length}"
     client.bulk body: bulk_items
   end
+  puts "done"
 end
 
 
@@ -24,8 +26,8 @@ end
 
 options = {
   host: 'localhost:9200',
-  index: '_all',
-  type: '_all'
+  index: '',
+  type: ''
 }
 
 OptionParser.new do |opts|
