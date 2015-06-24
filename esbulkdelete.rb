@@ -37,6 +37,12 @@ OptionParser.new do |opts|
   opts.on("-q", "--query QUERY", "Run verbosely") do | q |
     options[:query] = JSON.parse q
   end
+  opts.on("-i", "--index INDEX", "Run verbosely") do | i |
+    options[:index] = i
+  end
+  opts.on("-t", "--type TYPE", "Run verbosely") do | t |
+    options[:type] = t
+  end
 end.parse!
 
 
