@@ -1,6 +1,6 @@
 # Introduction
 
-Elasticsearch 1.6 removed the ability to delete documents by query over some performance concerns. This ruby script implements delete using scan & scroll search and a bulk delete, as recommended.
+Elasticsearch 1.5.3 deprecates the ability to delete documents by query over some performance concerns. The feature will be removed in 2.0. This ruby script implements delete using scan & scroll search and a bulk delete, as recommended.
 
 # Disclaimer
 
